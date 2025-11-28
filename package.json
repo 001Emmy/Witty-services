@@ -1,0 +1,15 @@
+{
+  "name": "witty-services",
+  "version": "1.0.0",
+  "description": "A simple static website for Witty Services",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
