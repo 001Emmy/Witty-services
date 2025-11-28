@@ -202,13 +202,18 @@ p {
 }
 
 /* Hero Section */
+:root {
+    --navbar-height: 80px; /* Default navbar height */
+}
+
 .hero {
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9)), 
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9)),
                 url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    height: 100vh;
+    min-height: calc(100vh - var(--navbar-height)); /* Use min-height for flexibility, accounting for navbar */
+    padding: var(--navbar-height) 0; /* Add padding to ensure content is not cut off by fixed navbar */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -645,8 +650,11 @@ p {
         font-size: 2.2rem;
     }
 
+    .hero-content {
+        padding: 2rem 0; /* Add vertical padding for hero content on tablets */
+    }
     .hero-content h1 {
-        font-size: 3rem;
+        font-size: 2.8rem; /* Slightly reduce font size for tablets */
     }
 
     .hero-content p {
@@ -683,6 +691,14 @@ p {
 
     .nav-logo {
         font-size: 1.2rem; /* Reduced font size for mobile logo */
+    }
+
+    :root {
+        --navbar-height: 60px; /* Adjusted navbar height for mobile */
+    }
+
+    :root {
+        --navbar-height: 60px; /* Adjusted navbar height for mobile */
     }
 
     .nav-menu {
@@ -790,11 +806,21 @@ p {
     /* Adjust hero section content for smaller screens */
     .hero-content {
         margin-bottom: 2rem;
-        padding: 0 15px;
+        padding: 1.5rem 15px; /* Adjusted vertical padding for hero content on mobile */
+    }
+
+    .hero {
+        padding-top: var(--navbar-height); /* Ensure hero content starts below the adjusted navbar */
+        min-height: calc(100vh - var(--navbar-height));
+    }
+
+    .hero {
+        padding-top: var(--navbar-height); /* Ensure hero content starts below the adjusted navbar */
+        min-height: calc(100vh - var(--navbar-height));
     }
 
     .hero-content h1 {
-        font-size: 2.2rem; /* Further adjustment for hero H1 on smaller screens */
+        font-size: 2rem; /* Further adjustment for hero H1 on smaller screens */
     }
 
     .hero-content p {
@@ -813,7 +839,7 @@ p {
 
 @media (max-width: 480px) {
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2rem; /* Further adjustment for hero H1 on smaller screens */
     }
 
     .hero-content p {
