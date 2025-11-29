@@ -10,6 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^7.0.0",
     "serve": "^14.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/001Emmy/Witty-services.git"
+  },
+  "bugs": {
+    "url": "https://github.com/001Emmy/Witty-services/issues"
+  },
+  "homepage": "https://github.com/001Emmy/Witty-services#readme"
 }

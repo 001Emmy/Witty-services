@@ -42,35 +42,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Contact form handling
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Get form data
     const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-    const service = formData.get('service');
-    const message = formData.get('message');
-    
+    const data = Object.fromEntries(formData.entries());
+
     // Basic validation
-    if (!name || !email || !service || !message) {
+    if (!data.name || !data.email || !data.service || !data.message) {
         showNotification('Please fill in all required fields.', 'error');
         return;
     }
     
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(data.email)) {
         showNotification('Please enter a valid email address.', 'error');
         return;
     }
-    
-    // Simulate form submission (in a real application, you would send this to a server)
-    showNotification('Thank you for your message! We will get back to you soon.', 'success');
-    
-    // Reset form
-    contactForm.reset();
+
+    try {
+        const response = await fetch('http://localhost:5000/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            showNotification(result.message, 'success');
+            contactForm.reset();
+        } else {
+            showNotification(result.message || 'Form submission failed.', 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showNotification('An error occurred during submission.', 'error');
+    }
 });
 
 // Notification system
